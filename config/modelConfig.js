@@ -2,7 +2,8 @@
 const mongoose = require("mongoose");
 // mongoose.connect('mongodb://localhost:27017/basic1');
 mongoose.connect(process.env.URL, {
-  useNewUrlParser: "true",
+  useNewUrlParser: true,
+  useUnifiedTopology:true
 });
 mongoose.connection.on("error", (err) => {
   console.log("mongoose Connection Error", err);

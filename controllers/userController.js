@@ -1,8 +1,9 @@
-const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { unlinkSync } = require("fs");
+const userModel = require("../models/userModel");
 const { transporter } = require("../services/emailService");
+
 //function for create users
 const createUser = async (req, res) => {
   const userData = new userModel(req.body);
@@ -20,6 +21,7 @@ const createUser = async (req, res) => {
       //encryption of password
       const salt = await bcrypt.genSalt(10);
       userData.userPassword = await bcrypt.hash(req.body.userPassword, salt);
+      //where the file pic store in server
       const filePath = `/uploads/user/${req.file.filename}`;
       userData.profilePic = filePath;
       const user = await userData.save();
@@ -51,13 +53,13 @@ const userLogin = async (req, res) => {
         });
         res.status(200).json({
           success: true,
-          message: "User Logged in Sucessfully",
+          message: "User logged in sucessfully",
           accessToken: token,
         });
       } else {
         res.status(401).json({
           success: false,
-          message: "Invalid Credentials",
+          message: "Invalid credentials",
         });
       }
     } else {
@@ -126,12 +128,12 @@ const resetPassword = async (req, res) => {
         });
         res.status(201).json({
           success: true,
-          message: "password updated successfully",
+          message: "Password updated successfully",
         });
       } else {
         res.status(403).json({
           success: false,
-          message: "new password and confirm password does not match",
+          message: "New password and confirm password does not match",
         });
       }
     }
@@ -154,7 +156,7 @@ const getUser = async (req, res) => {
     });
   } catch (err) {
     res.send({
-      message: "Error Occured ",
+      message: "Error occured",
       status: false,
       error: err,
     });
@@ -173,13 +175,13 @@ const updateUser = async (req, res) => {
       }
     );
     res.send({
-      message: "user updated sucessfully",
+      message: "User updated sucessfully",
       status: true,
       updatedUser: updatedUser,
     });
   } catch (error) {
     res.send({
-      message: "unable to update user",
+      message: "Unable to update user",
       status: false,
       error: err,
     });
@@ -195,18 +197,19 @@ const deleteUser = async (req, res) => {
       {}
     );
     res.send({
-      message: "user deleted sucessfully",
+      message: "User deleted sucessfully",
       status: true,
       deletedUser: deletedUser,
     });
   } catch (error) {
     res.send({
-      message: "unable to delete user",
+      message: "Unable to delete user",
       status: false,
       error: err,
     });
   }
 };
+
 module.exports = {
   createUser,
   getUser,

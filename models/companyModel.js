@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const companySchema = mongoose.Schema({
   companyName: {
     type: String,
@@ -22,5 +23,5 @@ const companySchema = mongoose.Schema({
   },
 });
 companySchema.set("timestamps", true);
-module.exports = mongoose.model("company", companySchema);
 
+module.exports = mongoose.model("company", companySchema);

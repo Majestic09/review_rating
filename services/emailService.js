@@ -1,5 +1,3 @@
-// // vkki glyx nlns tson
-
 let nodemailer = require("nodemailer");
 let transporter = nodemailer.createTransport({
   service: "gmail",
@@ -8,7 +6,7 @@ let transporter = nodemailer.createTransport({
     pass: "vkkiglyxnlnstson",
   },
 });
-
+// for practice purpose only
 // let mailOptions = {
 //   from: "shoppingonline2109@gmail.com",
 //   to: "iammanish2109@gmail.com",

@@ -20,12 +20,12 @@ const userValSchema = {
         .integer()
         .min(1000000000)
         .max(9999999999)
-        .message("Invalid Mobile Number")
+        .message("Invalid mobile number")
         .required(),
       userEmail: joi
         .string()
         .email()
-        .message("Invalid email addredd")
+        .message("Invalid email address")
         .required(),
       userPassword: joiPassword
         .string()
@@ -82,4 +82,5 @@ const userValSchema = {
       .required(),
   }),
 };
+
 module.exports = userValSchema;

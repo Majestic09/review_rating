@@ -1,6 +1,10 @@
 const express = require("express");
-const { createReview } = require("../controllers/reviewController");
 const reviewRouter = express.Router();
+const {
+    companyReviewValidation,
+} = require("../validation/companyReview/reviewDatavalidation");
+const { createReview } = require("../controllers/reviewController");
 
-reviewRouter.post("/addreview", createReview);
-module.exports = reviewRouter
+reviewRouter.post("/addreview", companyReviewValidation, createReview);
+
+module.exports = reviewRouter;

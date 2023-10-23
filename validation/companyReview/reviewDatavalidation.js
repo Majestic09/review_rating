@@ -2,9 +2,9 @@
 const reviewValSchema = require("./reviewValSchema")
 
 module.exports = {
-    createCompanyValidation: async (req, res, next) => {
+    companyReviewValidation: async (req, res, next) => {
         let isValid = await reviewValSchema.createReview.validate(req.body, {
-            abortEarly:false
+            abortEarly: false
         })
         if (isValid.error) {
             res.status(403).json({

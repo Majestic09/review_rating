@@ -1,7 +1,6 @@
+const { unlinkSync } = require("fs");
 const companyModel = require("../models/companyModel");
 const companyReviewModel = require("../models/companyReviewModel");
-const { unlinkSync } = require("fs");
-const { search } = require("../routes/companyRoutes");
 
 module.exports = {
   createCompany: async (req, res) => {
@@ -14,7 +13,7 @@ module.exports = {
       const checkCompany = await companyModel.findOne({
         companyName: req.body.companyName,
       });
-      if (!checkCompany ) {
+      if (checkCompany != null) {
         req.file ? unlinkSync(req.file.path) : null;
         res.status(409).json({
           success: false,
@@ -26,7 +25,7 @@ module.exports = {
         const company = await newCompany.save();
         res.status(201).json({
           success: true,
-          message: "Company Created",
+          message: "Company created",
           addedCompany: company,
         });
       }
@@ -56,22 +55,23 @@ module.exports = {
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: `Review Not found ${error.message}`,
+        message: `Review not found ${error.message}`,
       });
     }
   },
+
   companyList: async (req, res) => {
     try {
       const allCompanyData = await companyModel.find();
       res.status(200).json({
         success: true,
-        message: "Got All Company List",
+        message: "Got all company list",
         companyList: allCompanyData,
       });
     } catch (err) {
       res.status(404).json({
         success: false,
-        message: `company list not found`,
+        message: `Company list not found`,
       });
     }
   },
@@ -79,7 +79,9 @@ module.exports = {
   searchCompany: async (req, res) => {
     const searchData = req.body.companyCity;
     try {
-      const searchCompanyData = await companyModel.find({companyCity:searchData})
+      const searchCompanyData = await companyModel.find({
+        companyCity: searchData,
+      });
       res.status(200).json({
         success: true,
         message: `Got all companies ${searchData}`,
@@ -88,8 +90,8 @@ module.exports = {
     } catch (err) {
       res.status(403).json({
         success: false,
-        error :err.message
-      })
+        error: err.message,
+      });
     }
   },
 };

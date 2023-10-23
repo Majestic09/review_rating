@@ -1,10 +1,10 @@
-require("dotenv").config();
 const express = require("express");
-// const { transport, mailOptions } = require("./services/emailService");
 const app = express();
+require("dotenv").config();
 require("./config/modelConfig")
 const cron = require("node-cron");
 const mainRouter = require("./routes/mainRoute");
+// const { transport, mailOptions } = require("./services/emailService");
 
 const PORT = process.env.PORT || 8080
 const HOST = "localhost";

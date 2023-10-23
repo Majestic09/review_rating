@@ -18,4 +18,5 @@ const companyValSchema = {
     })
     .unknown(true),
 };
+
 module.exports = companyValSchema;

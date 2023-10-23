@@ -1,6 +1,7 @@
 const multer = require("multer");
 const path = require("path");
 
+//specify the directory 
 const imageConfig = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, path.join(__dirname, "..", "/uploads/company"));
@@ -17,7 +18,7 @@ const isImage = (req, file, callback) => {
     callback(new Error("Only image file are allowed"));
   }
 };
-
+//setting up multer with two properties
 const companyUpload = multer({
   storage: imageConfig,
   fileFilter: isImage,

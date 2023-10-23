@@ -9,4 +9,5 @@ function authoriseAdmin(req, res, next) {
     });
   }
 }
+
 module.exports = authoriseAdmin;

@@ -1,4 +1,3 @@
-
 const companyReviewModel = require("../models/companyReviewModel");
 
 module.exports = {
@@ -8,13 +7,13 @@ module.exports = {
             await reviewData.save();
             res.status(201).json({
                 sucess: true,
-                message: "Review Added Sucessfully",
+                message: "Review added sucessfully",
                 review:reviewData
             })
         } catch (error) {
             res.status(500).json({
                 success: false,
-                message:`Eroor Occured ${error.message}`
+                message:`Eroor occured ${error.message}`
             })
         }
     }

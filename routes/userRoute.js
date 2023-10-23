@@ -1,12 +1,12 @@
-const userController = require("../controllers/userController");
 const express = require("express");
 const userRouter = express.Router();
+const userController = require("../controllers/userController");
 const {
   registerUserValidation,
   loginUserValidation,
 } = require("../validation/user/userDataValidation");
 const { userUpload } = require("../middlewares/userUploads");
-
+const authoriseAdmin = require("../middlewares/authorization");
 
 userRouter.post(
   "/createuser",
@@ -14,13 +14,11 @@ userRouter.post(
   registerUserValidation,
   userController.createUser
 );
-
-userRouter.post("/login", loginUserValidation, userController.userLogin);
-userRouter.post("/reset", userController.resetUserPassword);
-userRouter.post("/resetpassword/:id/:token",userController.resetPassword)
 userRouter.get("/getallusers", userController.getUser);
-userRouter.patch("/update/:id", userController.updateUser);
-userRouter.delete("/delete/:id", userController.deleteUser);
+userRouter.post("/reset", userController.resetUserPassword);
+userRouter.post("/login", loginUserValidation, userController.userLogin);
+userRouter.patch("/update/:id",authoriseAdmin, userController.updateUser);
+userRouter.post("/resetpassword/:id/:token", userController.resetPassword);
+userRouter.delete("/delete/:id",authoriseAdmin, userController.deleteUser);
 
 module.exports = userRouter;
-
